@@ -12,3 +12,18 @@ html {
 body {
   line-height: 1.6;
 }
+
+a {
+  text-decoration: none;
+  color: $color-white;
+
+  &:hover, &:visited {
+    color: $color-white;
+  }
+}
+
+button {
+  &:focus{
+    outline: none;
+  }
+}

@@ -1,13 +1,34 @@
 <template>
-  <div class="container">
-    Container
+  <div class="wrapper">
+    <div class="container">
+      <LayoutNavigation />
+    </div>
   </div>
 </template>
 
+<script>
+import LayoutNavigation from "@/components/LayoutNavigation";
+
+export default {
+  name: "App",
+  components: {
+    LayoutNavigation
+  }
+};
+</script>
+
 <style lang="scss">
 @import "./scss/main.scss";
+
+.wrapper {
+  width: 85%;
+  margin: 0 auto;
+  background-color: $color-primary;
+}
+
 .container {
-  width: $size-container-width;
-  margin: 3rem auto;
+  width: 83%;
+  margin: 0 auto;
+  height: 100vh;
 }
 </style>
