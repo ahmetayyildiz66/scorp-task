@@ -8,6 +8,10 @@
         Homepage
       </router-link>
     </div>
+    <button class="navbar__hamburger" @click="onRightIcon">
+      <IconHamburger v-if="isHamburgerActive" />
+      <IconCross class="navbar__cross" v-else />
+    </button>
     <div class="navbar__right">
       <a href="#" class="navbar__homepage">Homepage</a>
       <a href="#" class="navbar__contact">Contact</a>
@@ -23,12 +27,26 @@
 <script>
 import PersonalLogo from "@/assets/PersonalLogo.svg";
 import IconWorld from "@/assets/IconWorld.svg";
+import IconHamburger from "@/assets/IconHamburger.svg";
+import IconCross from "@/assets/IconCross.svg";
 
 export default {
   name: "LayoutNavigation",
   components: {
     PersonalLogo,
-    IconWorld
+    IconWorld,
+    IconHamburger,
+    IconCross
+  },
+  data() {
+    return {
+      isHamburgerActive: true
+    };
+  },
+  methods: {
+    onRightIcon() {
+      this.isHamburgerActive = !this.isHamburgerActive;
+    }
   }
 };
 </script>
@@ -41,11 +59,21 @@ export default {
   align-items: center;
   justify-content: space-between;
 
+  &__logo {
+    @include respond(phone) {
+      display: none;
+    }
+  }
+
   &__left {
     width: 20rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @include respond(phone) {
+      justify-content: start;
+    }
   }
 
   &__right {
@@ -55,6 +83,10 @@ export default {
 
     & > * {
       padding: 0 2rem;
+    }
+
+    @include respond(phone) {
+      display: none;
     }
   }
 
@@ -83,6 +115,21 @@ export default {
   &__local-text {
     font-size: 1.4rem;
     margin-left: 0.5rem;
+  }
+
+  &__hamburger {
+    display: none;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    @include respond(phone) {
+      display: inline;
+    }
+  }
+
+  &__cross {
+    margin-right: 1rem;
   }
 }
 </style>

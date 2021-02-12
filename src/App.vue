@@ -30,5 +30,9 @@ export default {
   width: 83%;
   margin: 0 auto;
   height: 100vh;
+
+  @include respond(phone) {
+    width: 93%;
+  }
 }
 </style>
