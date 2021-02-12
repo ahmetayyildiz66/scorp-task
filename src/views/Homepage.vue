@@ -2,8 +2,7 @@
   <main class="main">
     <h1>Rockstar</h1>
     <p>
-      This webapp built only for demo purposes. You can use wherever you want.
-      However, you can NOT claim that the design belogs to you.
+      {{ $t("dummyMessage") }}
     </p>
   </main>
 </template>

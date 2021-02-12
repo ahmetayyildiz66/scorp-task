@@ -15,9 +15,9 @@
     <div class="navbar__right">
       <a href="#" class="navbar__homepage">Homepage</a>
       <a href="#" class="navbar__contact">Contact</a>
-      <button class="navbar__localization">
+      <button class="navbar__localization" @click="changeLanguage">
         <IconWorld />
-        <span class="navbar__local-text">TR</span>
+        <span class="navbar__local-text">{{ $t("language") }}</span>
       </button>
       <button class="navbar__login">Login</button>
     </div>
@@ -46,6 +46,13 @@ export default {
   methods: {
     onRightIcon() {
       this.isHamburgerActive = !this.isHamburgerActive;
+    },
+    changeLanguage() {
+      if (this.$i18n.locale === "en") {
+        this.$i18n.locale = "tr";
+      } else {
+        this.$i18n.locale = "en";
+      }
     }
   }
 };
