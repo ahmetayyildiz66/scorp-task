@@ -2,17 +2,21 @@
   <div class="wrapper">
     <div class="container">
       <LayoutNavigation />
+      <router-view></router-view>
+      <LayoutFooter />
     </div>
   </div>
 </template>
 
 <script>
 import LayoutNavigation from "@/components/LayoutNavigation";
+import LayoutFooter from "@/components/LayoutFooter";
 
 export default {
   name: "App",
   components: {
-    LayoutNavigation
+    LayoutNavigation,
+    LayoutFooter
   }
 };
 </script>
