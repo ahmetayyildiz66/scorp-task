@@ -1,11 +1,11 @@
 <template>
   <nav class="navbar">
     <div class="navbar__left">
-      <router-link tag="a" to="/">
+      <router-link tag="a" to="/" exact>
         <PersonalLogo class="navbar__logo" />
       </router-link>
       <router-link tag="a" to="/">
-        Homepage
+        {{ $route.name }}
       </router-link>
     </div>
     <button class="navbar__hamburger" @click="onRightIcon">
@@ -14,12 +14,16 @@
     </button>
     <div class="navbar__right">
       <a href="#" class="navbar__homepage">Homepage</a>
-      <a href="#" class="navbar__contact">Contact</a>
+      <router-link tag="a" to="/contact" class="navbar__contact"
+        >Contact</router-link
+      >
       <button class="navbar__localization" @click="onLanguageChange">
         <IconWorld />
         <span class="navbar__local-text">{{ $t("language") }}</span>
       </button>
-      <button class="navbar__login">Login</button>
+      <button class="navbar__login" v-if="!userLoggedIn" @click="onLoginButton">
+        Login
+      </button>
     </div>
   </nav>
 </template>
@@ -39,13 +43,18 @@ export default {
     IconHamburger,
     IconCross
   },
+  props: {
+    isModalClosed: Boolean
+  },
   data() {
     return {
-      isHamburgerActive: true
+      isHamburgerActive: true,
+      isModalOpen: false
     };
   },
   computed: {
-    ...mapGetters("language", ["currentLang"])
+    ...mapGetters("language", ["currentLang"]),
+    ...mapGetters("user", ["userLoggedIn"])
   },
   methods: {
     ...mapActions("language", ["changeLanguage"]),
@@ -54,12 +63,18 @@ export default {
     },
     onLanguageChange() {
       if (this.currentLang === "en") {
-        this.changeLanguage("tr");
-        this.$i18n.locale = "tr";
+        this.changeCurrentLanguage("tr");
       } else {
-        this.changeLanguage("en");
-        this.$i18n.locale = "en";
+        this.changeCurrentLanguage("en");
       }
+    },
+    changeCurrentLanguage(lang) {
+      this.changeLanguage(lang);
+      this.$i18n.locale = lang;
+    },
+    onLoginButton() {
+      this.isModalOpen = !this.isModalClosed;
+      this.$emit("modal-open", this.isModalOpen);
     }
   }
 };

@@ -1,5 +1,5 @@
 export const actions = {
-  addUserName({ commit }, username) {
-    commit("ADD_USERNAME", username);
+  addUserInfo({ commit }, user) {
+    commit("ADD_USER", user);
   }
 };
