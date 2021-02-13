@@ -12,8 +12,11 @@
       <IconHamburger v-if="isHamburgerActive" />
       <IconCross class="navbar__cross" v-else />
     </button>
-    <div class="navbar__right">
-      <a href="#" class="navbar__homepage">Homepage</a>
+    <div
+      class="navbar__right"
+      :class="{ 'hamburger-active': isHamburgerActive }"
+    >
+      <router-link to="/" class="navbar__homepage">Homepage</router-link>
       <router-link tag="a" to="/contact" class="navbar__contact"
         >Contact</router-link
       >
@@ -128,7 +131,18 @@ export default {
     }
 
     @include respond(phone) {
-      display: none;
+      & > * {
+        padding: 0.5rem 0;
+      }
+      position: absolute;
+      top: 6rem;
+      left: 4.2rem;
+      width: 85%;
+      height: 18rem;
+      align-items: flex-start;
+      color: $color-black;
+      flex-direction: column;
+      background-color: $color-secondary;
     }
   }
 
@@ -141,6 +155,14 @@ export default {
     padding-bottom: 1rem;
     font-size: 1.6rem;
     cursor: pointer;
+
+    @include respond(phone) {
+      color: $color-secondary;
+      background-color: $color-primary;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      margin-bottom: 1rem;
+    }
   }
 
   &__localization {
@@ -157,6 +179,10 @@ export default {
   &__local-text {
     font-size: 1.4rem;
     margin-left: 0.5rem;
+
+    @include respond(phone) {
+      color: $color-black;
+    }
   }
 
   &__hamburger {
@@ -178,6 +204,12 @@ export default {
 .user {
   &__name {
     cursor: pointer;
+  }
+}
+
+.hamburger-active {
+  @include respond(phone) {
+    display: none;
   }
 }
 </style>

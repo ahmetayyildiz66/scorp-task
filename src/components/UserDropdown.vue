@@ -33,6 +33,13 @@ export default {
   flex-direction: column;
   color: $color-black;
 
+  @include respond(phone) {
+    margin-left: 0;
+    margin-top: 0.5rem;
+    color: $color-primary;
+    background-color: $color-secondary;
+  }
+
   &__logout {
     height: 4rem;
     margin-left: 10%;
