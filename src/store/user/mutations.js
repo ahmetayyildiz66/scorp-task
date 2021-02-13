@@ -9,5 +9,14 @@ export const mutations = {
   RESET_USER(state) {
     state.userInfo = {};
     state.isUserLoggedIn = false;
+  },
+  UPDATE_TITLE(state, title) {
+    state.userInfo.title = title;
+  },
+  UPDATE_USERNAME(state, username) {
+    state.userInfo.username = username;
+  },
+  UPDATE_EMAIL(state, email) {
+    state.userInfo.email = email;
   }
 };
