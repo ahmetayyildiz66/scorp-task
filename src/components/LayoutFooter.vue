@@ -1,7 +1,5 @@
 <template>
-  <footer class="footer">
-    &copy; 2021 This basic web app was built only for Scorp
-  </footer>
+  <footer class="footer">&copy; {{ $t("footer") }}</footer>
 </template>
 
 <script>
