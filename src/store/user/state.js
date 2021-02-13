@@ -1,4 +1,9 @@
 export const state = {
-  username: "Ahmet",
+  userInfo: {
+    username: "",
+    title: "",
+    email: "",
+    password: ""
+  },
   isUserLoggedIn: false
 };

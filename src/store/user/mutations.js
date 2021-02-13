@@ -1,9 +1,13 @@
 export const mutations = {
   ADD_USER(state, user) {
-    state.title = user.title;
-    state.username = user.name;
-    state.password = user.password;
+    state.userInfo.title = user.title;
+    state.userInfo.username = user.name;
+    state.userInfo.password = user.password;
+    state.userInfo.email = user.email;
     state.isUserLoggedIn = true;
-    state.email = user.email;
+  },
+  RESET_USER(state) {
+    state.userInfo = {};
+    state.isUserLoggedIn = false;
   }
 };

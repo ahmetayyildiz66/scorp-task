@@ -24,12 +24,20 @@
       <button class="navbar__login" v-if="!userLoggedIn" @click="onLoginButton">
         Login
       </button>
+      <div class="user" v-else>
+        <h4 class="user__name" @click="toggleDropdown">
+          {{ userInfo.username }}
+        </h4>
+        <UserDropdown v-if="isDropdownOpen" :userInfo="userInfo" />
+      </div>
     </div>
   </nav>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+
+import UserDropdown from "./UserDropdown";
 import PersonalLogo from "@/assets/PersonalLogo.svg";
 import IconWorld from "@/assets/IconWorld.svg";
 import IconHamburger from "@/assets/IconHamburger.svg";
@@ -41,7 +49,8 @@ export default {
     PersonalLogo,
     IconWorld,
     IconHamburger,
-    IconCross
+    IconCross,
+    UserDropdown
   },
   props: {
     isModalClosed: Boolean
@@ -49,12 +58,13 @@ export default {
   data() {
     return {
       isHamburgerActive: true,
-      isModalOpen: false
+      isModalOpen: false,
+      isDropdownOpen: false
     };
   },
   computed: {
     ...mapGetters("language", ["currentLang"]),
-    ...mapGetters("user", ["userLoggedIn"])
+    ...mapGetters("user", ["userLoggedIn", "userInfo"])
   },
   methods: {
     ...mapActions("language", ["changeLanguage"]),
@@ -75,6 +85,9 @@ export default {
     onLoginButton() {
       this.isModalOpen = !this.isModalClosed;
       this.$emit("modal-open", this.isModalOpen);
+    },
+    toggleDropdown() {
+      this.isDropdownOpen = !this.isDropdownOpen;
     }
   }
 };
@@ -159,6 +172,12 @@ export default {
 
   &__cross {
     margin-right: 1rem;
+  }
+}
+
+.user {
+  &__name {
+    cursor: pointer;
   }
 }
 </style>

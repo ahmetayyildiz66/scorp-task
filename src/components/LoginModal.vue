@@ -69,8 +69,12 @@ export default {
         password: this.password
       };
       this.addUserInfo(user);
+      if (!this.language) {
+        this.language = "EN";
+      }
       this.changeLanguage(this.language.toLowerCase());
       this.$i18n.locale = this.language.toLowerCase();
+      this.closeModal();
     }
   }
 };
