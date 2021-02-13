@@ -1,3 +1,4 @@
 export const state = {
-  username: "Ahmet"
+  username: "Ahmet",
+  isUserLoggedIn: false
 };

@@ -1,9 +1,14 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" :class="{ 'lighten-bg': isModalOpen }">
     <div class="container">
-      <LayoutNavigation />
+      <LayoutNavigation
+        @modal-open="openModal"
+        :isModalClosed="isModalOpen"
+        :class="{ 'disable-navigation': isModalOpen }"
+      />
       <router-view></router-view>
       <LayoutFooter />
+      <LoginModal @close-modal="closeModal" v-if="isModalOpen" />
     </div>
   </div>
 </template>
@@ -11,12 +16,27 @@
 <script>
 import LayoutNavigation from "@/components/LayoutNavigation";
 import LayoutFooter from "@/components/LayoutFooter";
+import LoginModal from "@/components/LoginModal";
 
 export default {
   name: "App",
   components: {
     LayoutNavigation,
-    LayoutFooter
+    LayoutFooter,
+    LoginModal
+  },
+  data() {
+    return {
+      isModalOpen: false
+    };
+  },
+  methods: {
+    openModal(modalVal) {
+      this.isModalOpen = modalVal;
+    },
+    closeModal() {
+      this.isModalOpen = false;
+    }
   }
 };
 </script>
@@ -38,5 +58,13 @@ export default {
   @include respond(phone) {
     width: 93%;
   }
+}
+
+.lighten-bg {
+  background-color: $color-dark-gray;
+}
+
+.disable-navigation {
+  pointer-events: none;
 }
 </style>
