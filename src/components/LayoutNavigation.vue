@@ -15,7 +15,7 @@
     <div class="navbar__right">
       <a href="#" class="navbar__homepage">Homepage</a>
       <a href="#" class="navbar__contact">Contact</a>
-      <button class="navbar__localization" @click="changeLanguage">
+      <button class="navbar__localization" @click="onLanguageChange">
         <IconWorld />
         <span class="navbar__local-text">{{ $t("language") }}</span>
       </button>
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 import PersonalLogo from "@/assets/PersonalLogo.svg";
 import IconWorld from "@/assets/IconWorld.svg";
 import IconHamburger from "@/assets/IconHamburger.svg";
@@ -43,14 +44,20 @@ export default {
       isHamburgerActive: true
     };
   },
+  computed: {
+    ...mapGetters("language", ["currentLang"])
+  },
   methods: {
+    ...mapActions("language", ["changeLanguage"]),
     onRightIcon() {
       this.isHamburgerActive = !this.isHamburgerActive;
     },
-    changeLanguage() {
-      if (this.$i18n.locale === "en") {
+    onLanguageChange() {
+      if (this.currentLang === "en") {
+        this.changeLanguage("tr");
         this.$i18n.locale = "tr";
       } else {
+        this.changeLanguage("en");
         this.$i18n.locale = "en";
       }
     }
