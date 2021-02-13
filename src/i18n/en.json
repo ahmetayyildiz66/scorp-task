@@ -1,4 +1,11 @@
 {
   "dummyMessage": "This webapp built only for demo purposes. You can use wherever you want. However, you can NOT claim that the design belogs to you.",
-  "language": "TR"
+  "language": "TR",
+  "login": "Login",
+  "footer": "2021 This basic web app was built only for Scorp",
+  "homepage": "Homepage",
+  "contact": "Contact",
+  "send": "Send",
+  "emailMessage": "Please enter a valid email address",
+  "phoneMessage": "Enter valid phone number"
 }

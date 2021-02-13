@@ -16,16 +16,18 @@
       class="navbar__right"
       :class="{ 'hamburger-active': isHamburgerActive }"
     >
-      <router-link to="/" class="navbar__homepage">Homepage</router-link>
-      <router-link tag="a" to="/contact" class="navbar__contact"
-        >Contact</router-link
-      >
+      <router-link to="/" class="navbar__homepage">{{
+        $t("homepage")
+      }}</router-link>
+      <router-link tag="a" to="/contact" class="navbar__contact">{{
+        $t("contact")
+      }}</router-link>
       <button class="navbar__localization" @click="onLanguageChange">
         <IconWorld />
         <span class="navbar__local-text">{{ $t("language") }}</span>
       </button>
       <button class="navbar__login" v-if="!userLoggedIn" @click="onLoginButton">
-        Login
+        {{ $t("login") }}
       </button>
       <div class="user" v-else>
         <h4 class="user__name" @click="toggleDropdown">

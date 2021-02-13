@@ -17,14 +17,29 @@
         class="form__input form__email"
         placeholder="Email"
         type="email"
-        v-model="email"
+        v-model="mail"
+        :class="{ 'border-red': validateEmail }"
       />
-      <input
-        class="form__input form__phone"
-        placeholder="Phone number"
-        type="text"
-        v-model="phoneNumber"
-      />
+      <span v-if="$v.mail.$dirty && (!$v.mail.required || !$v.mail.email)">
+        {{ $t("emailMessage") }}
+      </span>
+      <ValidationProvider
+        :rules="{
+          regex: /^(?:\+\d{1,3}|0\d{1,3}|00\d{1,2})?(?:\s?\(\d+\))?(?:[-\/\s.]|\d)+$/
+        }"
+        v-slot="{ errors }"
+      >
+        <input
+          class="form__input form__phone"
+          placeholder="Phone number"
+          type="text"
+          v-model="phoneNumber"
+          :class="{
+            'border-red': errors.length
+          }"
+        />
+        <p v-if="errors.length">{{ $t("phoneMessage") }}</p>
+      </ValidationProvider>
       <CountrySearch class="form__input" @country-code="getCountryCode" />
       <textarea
         class="form__text-area"
@@ -32,19 +47,25 @@
         cols="30"
         rows="10"
       />
-      <button class="form__submit" type="button" @click="onSend">Send</button>
+      <button class="form__submit" type="submit" @click.prevent="onSend">
+        {{ $t("send") }}
+      </button>
     </form>
   </main>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import { required, email } from "vuelidate/lib/validators";
 import CountrySearch from "../components/CountrySearch";
 
 export default {
   name: "ContactPage",
   components: {
     CountrySearch
+  },
+  mounted() {
+    this.mail = this.userInfo.email;
   },
   data() {
     return {
@@ -54,6 +75,12 @@ export default {
       textArea: "",
       countryCode: ""
     };
+  },
+  validations: {
+    mail: {
+      required,
+      email
+    }
   },
   computed: {
     ...mapGetters("user", ["userInfo"]),
@@ -79,12 +106,24 @@ export default {
       },
       set(value) {
         this.mail = value;
+        this.updateEmail(value);
       }
+    },
+    validateEmail() {
+      return (
+        this.$v.mail.$dirty && (!this.$v.mail.required || !this.$v.mail.email)
+      );
     }
   },
   methods: {
-    ...mapActions("user", ["updateTitle", "updateUsername", "updateEmail"]),
+    ...mapActions("user", [
+      "updateTitle",
+      "updateUsername",
+      "updateEmail",
+      "isUserLoggedIn"
+    ]),
     onSend() {
+      this.$v.$touch();
       const obj = {
         name: this.userInfo.username,
         email: this.email,
@@ -96,6 +135,12 @@ export default {
       console.log(`JSON: ${JSON.stringify(obj)}`);
     },
     getCountryCode(code) {
+      if (code === "TR") {
+        console.log("TR");
+        this.$i18n.locale = "tr";
+      } else {
+        this.$i18n.locale = "en";
+      }
       this.countryCode = code;
     }
   }
@@ -145,5 +190,9 @@ export default {
   &__text-area {
     margin-bottom: 2rem;
   }
+}
+
+.border-red {
+  border: 3px solid red;
 }
 </style>

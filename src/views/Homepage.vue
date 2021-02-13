@@ -1,6 +1,6 @@
 <template>
   <main class="main">
-    <h1>Rockstar</h1>
+    <h1>Spartacus</h1>
     <p>
       {{ $t("dummyMessage") }}
     </p>

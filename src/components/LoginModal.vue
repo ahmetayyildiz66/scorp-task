@@ -27,7 +27,9 @@
         v-model="password"
       />
       <LocalSelector class="form__language" @selectedLang="chosenLang" />
-      <button class="form__submit" type="button" @click="onLogin">Login</button>
+      <button class="form__submit" type="button" @click="onLogin">
+        {{ $t("login") }}
+      </button>
     </form>
   </div>
 </template>

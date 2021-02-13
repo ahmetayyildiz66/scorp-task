@@ -1,4 +1,11 @@
 {
   "dummyMessage": "Bu uygulama sadece demo amacıyla oluşturulmuştur. İstediğiniz şekilde kullanabilirsiniz.Fakat, kendinizin tasarladığınızı iddia edemezsiniz.",
-  "language": "EN"
+  "language": "EN",
+  "login": "Giriş",
+  "footer": "2021 Bu basit uygulama sadece Scorp için yapıldı.",
+  "homepage": "Anasayfa",
+  "contact": "İletişim",
+  "send": "Gönder",
+  "emailMessage": "Lütfen geçerli bir email adresi giriniz.",
+  "phoneMessage": "Geçerli bir numara giriniz."
 }
