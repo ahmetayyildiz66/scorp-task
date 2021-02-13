@@ -25,21 +25,34 @@
         type="text"
         v-model="phoneNumber"
       />
-      <button class="form__submit" type="button">Send</button>
+      <CountrySearch class="form__input" @country-code="getCountryCode" />
+      <textarea
+        class="form__text-area"
+        v-model="textArea"
+        cols="30"
+        rows="10"
+      />
+      <button class="form__submit" type="button" @click="onSend">Send</button>
     </form>
   </main>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import CountrySearch from "../components/CountrySearch";
 
 export default {
   name: "ContactPage",
+  components: {
+    CountrySearch
+  },
   data() {
     return {
       username: "",
       mail: "",
-      phoneNumber: ""
+      phoneNumber: "",
+      textArea: "",
+      countryCode: ""
     };
   },
   computed: {
@@ -70,7 +83,21 @@ export default {
     }
   },
   methods: {
-    ...mapActions("user", ["updateTitle", "updateUsername", "updateEmail"])
+    ...mapActions("user", ["updateTitle", "updateUsername", "updateEmail"]),
+    onSend() {
+      const obj = {
+        name: this.userInfo.username,
+        email: this.email,
+        phoneNumber: this.phoneNumber,
+        country_code: this.countryCode,
+        text: this.textArea
+      };
+
+      console.log(`JSON: ${JSON.stringify(obj)}`);
+    },
+    getCountryCode(code) {
+      this.countryCode = code;
+    }
   }
 };
 </script>
@@ -113,6 +140,10 @@ export default {
     position: absolute;
     top: 1rem;
     left: 1rem;
+  }
+
+  &__text-area {
+    margin-bottom: 2rem;
   }
 }
 </style>
