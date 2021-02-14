@@ -138,9 +138,10 @@ export default {
       }
       position: absolute;
       top: 6rem;
-      left: 4.7rem;
+      left: 3.7rem;
       width: 85%;
       height: 18rem;
+      padding-left: 2rem;
       align-items: flex-start;
       color: $color-black;
       flex-direction: column;
