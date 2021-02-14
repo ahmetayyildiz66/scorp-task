@@ -1,5 +1,8 @@
 # scorp
 
+## Deployed app
+https://loving-pasteur-ec3927.netlify.app/
+
 ## Project setup
 ```
 npm install
