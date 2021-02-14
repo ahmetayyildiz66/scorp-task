@@ -138,7 +138,7 @@ export default {
       }
       position: absolute;
       top: 6rem;
-      left: 4.2rem;
+      left: 4.7rem;
       width: 85%;
       height: 18rem;
       align-items: flex-start;
