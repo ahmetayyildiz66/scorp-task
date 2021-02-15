@@ -138,8 +138,8 @@ export default {
       }
       position: absolute;
       top: 6rem;
-      left: 3.7rem;
-      width: 85%;
+      left: 0;
+      width: 100%;
       height: 18rem;
       padding-left: 2rem;
       align-items: flex-start;
