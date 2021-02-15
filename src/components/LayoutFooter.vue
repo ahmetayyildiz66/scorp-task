@@ -16,6 +16,8 @@ export default {
 
   @include respond(phone) {
     top: 88%;
+    padding: 0 4rem;
+    text-align: center;
   }
 }
 </style>
