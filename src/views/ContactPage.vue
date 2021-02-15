@@ -150,6 +150,10 @@ export default {
 <style lang="scss" scoped>
 .contact {
   margin-top: 10rem;
+
+  @include respond(phone) {
+    margin-top: 3rem;
+  }
 }
 
 .form {
